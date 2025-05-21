@@ -1,0 +1,45 @@
+version: "2"
+
+# Options for analysis running
+run:
+  # Exclude tests
+  tests: false
+  # Ensure modules are downloaded in CI before linting
+  modules-download-mode: readonly
+  # Timeout for analysis, e.g. 30s, 5m, default is 1m
+  timeout: 10m
+  # Exit code when at least one issue was found, default is 1
+  issues-exit-code: 1
+
+# Configure specific linters
+linters:
+  default: fast
+  enable:
+    - errcheck
+    - govet
+    - ineffassign
+    - staticcheck
+    - unused
+    - misspell
+    - gosec
+    - revive
+    - prealloc
+  settings:
+    errcheck:
+      # Report about not checking of errors in type assertions: `a := b.(MyStruct)`.
+      check-type-assertions: true
+    misspell:
+      locale: US
+
+formatters:
+  enable:
+    - gofmt
+    - goimports
+  settings:
+    gofmt:
+      simplify: false
+      rewrite-rules:
+        - pattern: interface{}
+          replacement: any
+        - pattern: a[b:len(a)]
+          replacement: a[b:]
