@@ -29,20 +29,6 @@ jobs:
           go mod download
           go mod verify
 
-    #   - name: Checkout shared lint config
-    #     uses: actions/checkout@v4
-    #     with:
-    #       repository: fianulabs/tools
-    #       ref: main
-    #       path: lint-tmp
-    #       sparse-checkout: |
-    #         go-lint/.golangci.yaml
-    #       sparse-checkout-cone-mode: false
-
-    #   - name: Copy shared lint config
-    #     shell: bash
-    #     run: cp lint-tmp/go-lint/.golangci.yaml ./.golangci.yaml
-
       - name: Run golangci-lint
         uses: golangci/golangci-lint-action@v8
         with:
